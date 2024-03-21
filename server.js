@@ -27,8 +27,8 @@ const PORT = process.env.PORT || 3000
 
 // Connect to the database
 mongoose.connect('mongodb://127.0.0.1:27017/cms')
-        .then((res) => console.log(console.log('Connection successfully')))
-        .catch((err) => console.log(console.log('We have ran into an error, while connecting...')))
+        .then((res) => console.log('Connection successfully'))
+        .catch((err) => console.log('We have ran into an error, while connecting...'))
 
 
 app.listen(PORT, () => {
@@ -50,7 +50,7 @@ const sendPassword = (req) => {
         from: 'gsimphiwe212@gmail.com',
         to: `${req.body.email}`,
         subject: 'Account',
-        text: `Hey ${req.body.fullName}, your user account has been successfully created and your password is ${req.body.password}. Use your email address and this password to log in. `
+        text: `Hey ${req.body.firstName} ${req.body.lastName}, your user account has been successfully created and your password is ${req.body.password}. Use your email address and this password to log in.`
     }
 
     mailTransporter.sendMail(details, (err) => {

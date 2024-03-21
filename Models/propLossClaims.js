@@ -19,7 +19,6 @@ lossDetails = {
 item = {
     itemNum: {type: String, require: true},
     make: {type: String, require: true},
-    serial_number: {type: String, require: true},
     purchaseLocation: {type: String, require: true},
     value: {type: String, require: true}
 }

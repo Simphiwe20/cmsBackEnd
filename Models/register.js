@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const Address = new mongoose.Schema({
     streetName: { type: String, required: true },
     streetNumber: { type: Number, required: true },
+    suburb: { type: String, required: true },
     city: { type: String, required: true },
     code: { type: Number, required: true }
 })
@@ -20,7 +21,7 @@ const register = new mongoose.Schema({
     startDate: { type: String, required: true },
     memberID: { type: String, required: false },
     employeeID: { type: String, required: false },
-    status: { type: String, required: false },
+    status: { type: String, required: true },
     role: { type: String, required: true }
 })
 
