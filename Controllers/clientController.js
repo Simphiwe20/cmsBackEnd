@@ -26,9 +26,9 @@ module.exports = {
     getclient: async (req, res)=>{
         try {
             console.log(req.body)
-            const result = await client.findOne( {idNumber: req.body.Idnumber} );
-            console.log(result)            
-            res.status(200).send({idNumber: result.idNumber})
+            const result = await client.findOne( req.body );
+            console.log('Res', result)            
+            res.status(200).send(result)
         } catch (error) {
             res.status(500).send(error);
         }

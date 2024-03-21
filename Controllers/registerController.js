@@ -52,7 +52,10 @@ module.exports = {
                 bcrypt.compare(req.body.password, foundUser.password, (err, result) => {
                     if (result) {
                         res.status(200).send(foundUser)
-                    } else {
+                    }else if(foundUser.status !== 'active'){
+                        res.status(401).send({ Error: 'Your account seems to be disabled, please contact the administrator' })
+                    } 
+                    else {
                         res.status(403).send({ Error: 'Password is incorrect' })
                     }
                 });
@@ -70,12 +73,13 @@ module.exports = {
             const filter = { email: req.body.email }
             const options = { upsert: true }
             const updates = { $set: req.body }
-
-            const updatedUser = await User.updateOne(filter, updates, options)
-            res.send(updatedUser)
+            console.log(filter)
+            const updatedUser = await register.updateOne(filter, updates, options)
+            console.log(updatedUser)
+            res.status(200).send(updatedUser)
         }
         catch {
-            res.send("We ran into an error")
+            res.status(500).send("We ran into an error")
         }
     },
 }

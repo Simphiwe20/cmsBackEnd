@@ -7,7 +7,7 @@ const client = new mongoose.Schema({
       email: {type: String, require: true, index : { unique: true }},
       cellPhone: {type: Number, require: true},
       memberID: {type: Number, require: true},
-      idNumber: {type: Number, require: true},
+      idNumber: {type: Number, require: true, index : { unique: true }},
       DOB: {type: Date, require: true},
       gender: {type: String, require: true},
       startDate: {type: Date, require: true}
