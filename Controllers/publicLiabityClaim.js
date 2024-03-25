@@ -1,10 +1,11 @@
-const propertyClaim = require('../Models/propLossClaims')
+const publicClaim = require('../Models/publicLiability')
+
 const File = require('../Models/file');
 const { Readable } = require("stream")
 const mongoose = require("mongoose")
 const multer = require('multer');
 
-const propertyId = `property-${new Date().getTime()}`;
+const attachmentId = `public-${new Date().getTime()}`;
 
 let bucket;
 mongoose.connection.on("open", () => {
@@ -17,23 +18,23 @@ const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 module.exports = {
-    getpropertyClaim: async (req, res) => {
+    getpublicClaim: async (req, res) => {
         try {
-            let claims = await propertyClaim.find()
+            let claims = await publicClaim.find()
             res.status(201).send(claims)
             console.log(claims)
         } catch {
             res.status(404).send(claims)
         }
     },
-    addpropertyClaim: async (req, res) => {
+    addPublicClaim: async (req, res) => {
         try {
 
 
             let payload = { ...req.body }
-            payload['commonId'] = propertyId
+            payload['commonId'] = attachmentId
             console.log(req.body)
-            let newClaim = propertyClaim(payload)
+            let newClaim = publicClaim(payload)
             console.log(newClaim)
             let result = newClaim.save()
             res.status(201).send(result)
@@ -41,7 +42,8 @@ module.exports = {
             console.log(err)
             res.status(500).send(err)
         }
-    }, updateStatus: async (req, res) => {
+    }, 
+    updateStatus: async (req, res) => {
         try {
             let filter = {claimID: req.body.claimID}
 
@@ -52,7 +54,7 @@ module.exports = {
 
             console.log(req.body)
 
-            let result = await propertyClaim.updateOne(filter, updateDoc, options)
+            let result = await publicClaim.updateOne(filter, updateDoc, options)
 
             console.log(result)
             res.status(200).send(result)
@@ -60,7 +62,7 @@ module.exports = {
         }catch {
             res.status(500).send('We ran into a problem')
         }
-    }, 
+    },
     uploadFile: async (req, res) => {
         try {
             const files = req.files;
@@ -77,7 +79,7 @@ module.exports = {
                     contentType: mimetype,
                     size: buffer.length,
                     fileId: uploadStream.id,
-                    commonId: propertyId
+                    commonId: attachmentId
                 });
                 await fileData.save();
                 return fileData;

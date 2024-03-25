@@ -25,7 +25,13 @@ item = {
 
 propertyLossClaim = new mongoose.Schema({
     lossDetails: lossDetails,
-    items: [item]
+    items: [item],
+    memberID: { type: String, required: true },
+    commonId: { type: String, required: true },
+    dateSubmitted: { type: Date, required: true },
+    status: { type: String, required: true },
+    claimID: { type: String, required: true },
+    submittedBy: { type: String, required: true },
 })
 
 module.exports = mongoose.model('propertyLossClaim', propertyLossClaim)

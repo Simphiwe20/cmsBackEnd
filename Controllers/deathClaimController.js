@@ -4,7 +4,7 @@ const { Readable } = require("stream")
 const mongoose = require("mongoose")
 const multer = require('multer');
 
-const pictureId = `picture-${new Date().getTime()}`;
+const deathId = `death-${new Date().getTime()}`;
 
 let bucket;
 mongoose.connection.on("open", () => {
@@ -34,7 +34,7 @@ module.exports = {
 
         try {
             let payload = { ...req.body }
-            payload['commonId'] = pictureId
+            payload['commonId'] = deathId
             console.log(payload)
             const newClaim = new deathClaim(payload)
             console.log(newClaim)
@@ -82,7 +82,7 @@ module.exports = {
                     contentType: mimetype,
                     size: buffer.length,
                     fileId: uploadStream.id,
-                    commonId: pictureId
+                    commonId: deathId
                 });
                 await fileData.save();
                 return fileData;
