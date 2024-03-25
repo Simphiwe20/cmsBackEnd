@@ -9,6 +9,7 @@ deceasedDetails = {
     telPhone: { type: Number, require: true },
     deathPlace:  { type: String, require: true },
     admissionNo: { type: String, require: true },
+    Other: { type: String, require: true }
 }
 undertakerDetails = {
     companyName: { type: String, require: true },
@@ -44,6 +45,7 @@ deathClaim = new mongoose.Schema({
     status: { type: String, required: true },
     claimID: { type: String, required: true },
     submittedBy: { type: String, required: true },
+    reason: {type: String, required: false}
 })
 
 module.exports = mongoose.model('deathClaim', deathClaim)
