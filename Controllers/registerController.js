@@ -21,8 +21,8 @@ module.exports = {
                         const result = await newregister.save()
                         console.log('Results', result)
                         res.status(200).send(result)
-                    }else {
-                        res.send({Error: 'User already exists'})
+                    } else {
+                        res.send({ Error: 'User already exists' })
                     }
 
                 } catch (error) {
@@ -45,9 +45,15 @@ module.exports = {
     },
     getclient: async (req, res) => {
         try {
-            const result = await register.findOne(req.params);
+            const result = await register.findOne({idNumber: req.body.idNumber});
             console.log(result)
-            res.status(200).send(result)
+            if (result) {
+                console.log(result)
+                res.status(200).send(result)
+            }else {
+                console.log('Error')
+                res.status(401).send({Error: "This ID number does not exist on our records"})
+            }
         } catch (error) {
             res.status(500).send(error);
         }
@@ -68,6 +74,9 @@ module.exports = {
                         } else {
                             res.status(200).send(foundUser)
                         }
+                    }
+                    else if(req.body.password === foundUser.password) {
+                        res.status(200).send(foundUser)
                     }
                     else {
                         res.status(403).send({ Error: 'Password is incorrect' })
@@ -95,7 +104,7 @@ module.exports = {
         catch {
             res.status(500).send("We ran into an error")
         }
-    },checkPassword: async (req, res) => {
+    }, checkPassword: async (req, res) => {
         console.log("req.body", req.body)
         // Checking matching password
         bcrypt.compare(req.body.plainPassword, req.body.hashedPassword, function (err, result) {

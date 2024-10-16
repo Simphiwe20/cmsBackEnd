@@ -71,7 +71,7 @@ module.exports = {
             const files = req.files;
             console.log(files)
             const promises = files.map(async (file, index) => {
-                const { originalname, mimetype, buffer } = file;
+                 
                 const uploadStream = bucket.openUploadStream(originalname);
                 const readableStream = new Readable();
                 readableStream.push(buffer);

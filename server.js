@@ -70,3 +70,41 @@ app.post('/sendPassword', (req, res) => {
         console.log(req.body)
     }
 })
+
+const sendNewPassword = (req) => {
+    
+    let mailTransporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'gsimphiwe212@gmail.com',
+            pass: 'kkdvatjekgzlwrvr'
+        },
+        // tls: {
+        //     rejectUnauthorized: false
+        // }
+    })
+
+    let details = {
+        from: 'gsimphiwe212@gmail.com',
+        to: `${req.body.email}`,
+        subject: 'New Password',
+        text: `Hey ${req.body.firstName} ${req.body.lastName}, This is your new passsword ${req.body.password}. Use your email address and this password to log in.`
+    }
+
+    mailTransporter.sendMail(details, (err) => {
+        if (err) {
+            console.log('It has an error', err)
+        } else {
+            console.log('Messege send successfully')
+        }
+    })
+}
+
+app.post('/sendNewPassword', (req, res) => {
+    if(req) {
+        sendNewPassword(req)
+        res.send(JSON.stringify('Password Sent successfully'))
+        console.log(req.body)
+    }
+})
+

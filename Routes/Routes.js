@@ -31,22 +31,16 @@ router.post('/upload-prop-files', upload.any(files), propertyClaimController.upl
 router.get('/download-files/:fileId', deathClaimController.downloadFile)
 router.get('/get-all-files', deathClaimController.getAllFile) 
 
-
-
 // Property claim controlers
 router.post('/add-property-claim', propertyClaimController.addpropertyClaim)
 router.get('/get-prop-claims', propertyClaimController.getpropertyClaim)
 router.put('/update-prop-claim', propertyClaimController.updateStatus)
 
-
-
 router.post('/upload', propertyClaimController.uploadFile)
-
 // Clients controllers
 router.get('/get-clients', clientController.getAllClient)
 router.post('/add-client', clientController.addClients)
 router.post('/get-client', clientController.getclient)
-
 
 // Register User controllers
 router.post('/add-user', registerController.addclient);
