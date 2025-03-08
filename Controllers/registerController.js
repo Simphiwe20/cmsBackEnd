@@ -34,9 +34,9 @@ module.exports = {
     },
     getClients: async (req, res) => {
         try {
-            let clients = await register.find()
-            console.log('User found', clients)
-            res.status(200).send(clients)
+            let users = await register.find()
+            console.log('User found', users)
+            res.status(200).send(users)
         }
         catch (err) {
             res.status(404).send(err)

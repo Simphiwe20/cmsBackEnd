@@ -26,7 +26,7 @@ app.use(routes)
 const PORT = process.env.PORT || 3000
 
 // Connect to the database
-mongoose.connect('mongodb://127.0.0.1:27017/cms')
+mongoose.connect('mongodb+srv://gsimphiwe212:9F0979NVnYw2bspd@cms-db.rpofb.mongodb.net/?retryWrites=true&w=majority&appName=cms-db')
         .then((res) => console.log('Connection successfully'))
         .catch((err) => console.log('We have ran into an error, while connecting...'))
 
@@ -78,10 +78,7 @@ const sendNewPassword = (req) => {
         auth: {
             user: 'gsimphiwe212@gmail.com',
             pass: 'kkdvatjekgzlwrvr'
-        },
-        // tls: {
-        //     rejectUnauthorized: false
-        // }
+        }
     })
 
     let details = {

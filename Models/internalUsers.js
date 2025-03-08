@@ -9,7 +9,8 @@ const internalUser = new mongoose.Schema({
       employeeID: {type: Number, require: true},
       idNumber: {type: Number, require: true},
       DOB: {type: Date, require: true},
-      gender: {type: String, require: true}
+      gender: {type: String, require: true},
+      role: {type: String, require: true},
 })
 
 module.exports = mongoose.model('internalUser', internalUser)
